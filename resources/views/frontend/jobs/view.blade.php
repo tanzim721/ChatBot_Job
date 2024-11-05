@@ -3,22 +3,6 @@
 @section('title', 'Jobbar — The Ultimate Job Board')
 
 @section('content')
-    @if (Route::has('login'))
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-            @auth
-                <a href="{{ url('/dashboard') }}"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-            @else
-                <a href="{{ route('login') }}"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                    in</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
     <section id="hero" class="bg-gray-900">
         <div class="relative isolate pt-14">
             <div class="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80">
@@ -73,6 +57,11 @@
                                     class="bg-indigo-500 hover:bg-indigo-500/60 transition px-5 py-3 rounded-lg text-white text-base font-medium absolute right-1.5 md:right-3 top-1.5 md:top-3">
                                     Search
                                 </button>
+                                <button>
+                                    <a href="{{ route('login') }}"
+                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                                        in</a>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -125,8 +114,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col items-start gap-6 md:flex-row md:items-center">
                                         <img alt="company logo" loading="lazy" class="w-16 h-16 p-2 bg-gray-700 rounded-xl"
-                                            style="color: transparent"
-                                            src="{{ $data->company_logo }}" />
+                                            style="color: transparent" src="{{ $data->company_logo }}" />
                                         <div>
                                             <p class="text-sm font-medium text-indigo-400">
                                                 {{ $data->company_name }}
