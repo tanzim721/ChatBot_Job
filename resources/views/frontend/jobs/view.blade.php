@@ -4,6 +4,7 @@
 
 @section('content')
     <section id="hero" class="bg-gray-900">
+
         <div class="relative isolate pt-14">
             <div class="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80">
                 <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
@@ -28,6 +29,13 @@
               );
             ">
                 </div>
+            </div>
+            <div class="absolute right-6 top-6">
+                @auth
+                    <a href="{{ route('dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+                @endauth
             </div>
             <div class="py-24 sm:py-32 lg:pb-40">
                 <div class="px-6 mx-auto max-w-7xl lg:px-8">
@@ -57,11 +65,7 @@
                                     class="bg-indigo-500 hover:bg-indigo-500/60 transition px-5 py-3 rounded-lg text-white text-base font-medium absolute right-1.5 md:right-3 top-1.5 md:top-3">
                                     Search
                                 </button>
-                                <button>
-                                    <a href="{{ route('login') }}"
-                                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                                        in</a>
-                                </button>
+
                             </div>
                         </form>
                     </div>

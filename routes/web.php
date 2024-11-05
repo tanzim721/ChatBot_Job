@@ -6,6 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WordpressController;
 use App\Models\ChatBox;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use App\Http\Resources\UserCollection;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'job'])->name('job');
 Route::get('/job/{job}', [HomeController::class, 'details'])->name('job.details');
 
+Route::get('/user/{id}', function (string $id) {
+    return new UserResource(User::findOrFail($id));
+});
+
+Route::get('/users', function () {
+    return UserResource::collection(User::all());
+});
+
+Route::get('/users', function () {
+    return new UserCollection(User::all());
+});
 
 Route::get('/dashboard', function () {
     $chatboxes = ChatBox::whereUserId(auth()->id())->paginate(10);
