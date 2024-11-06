@@ -7,7 +7,6 @@
     <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-@dump($jobs)
                 <form action="{{ route('admin.job.store') }}" method="POST" class="p-3">
                     @csrf
                     {{-- Job Title --}}

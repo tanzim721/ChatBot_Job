@@ -54,8 +54,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/chatbox/{chatbox?}', [ChatBoxController::class, 'index'])->name('chatbox');
     Route::get('/wordpress', [WordpressController::class, 'index'])->name('wordpress');
 
-    Route::get('admin/job/create', [CareerJobController::class, 'create'])->name('admin.job.create');
-    Route::post('admin/job', [CareerJobController::class, 'store'])->name('admin.job.store');
+    // Route::get('admin/career-jobs/create', [CareerJobController::class, 'create'])->name('admin.job.create');
+    // Route::post('admin/career-jobs', [CareerJobController::class, 'store'])->name('admin.job.store');
+Route::middleware('auth')->group(function () {
+    Route::resource('admin/career-jobs', CareerJobController::class)->names([
+        'index' => 'admin.job.index',
+        'create' => 'admin.job.create',
+        'store' => 'admin.job.store',
+        'show' => 'admin.job.show',
+        'edit' => 'admin.job.edit',
+        'update' => 'admin.job.update',
+        'destroy' => 'admin.job.destroy',
+    ]);
+});
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

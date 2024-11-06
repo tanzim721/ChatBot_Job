@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CareerJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ Route::get('/users', function () {
 Route::get('/user/{id}', function (string $id) {
     return new UserResource(User::findOrFail($id));
 });
+
+Route::apiResource('admin/career-jobs', CareerJobController::class);
