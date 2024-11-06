@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('wordpress')" :active="request()->routeIs('wordpress')">
                         {{ __('Wordpress') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.job.create')" :action="request()->routeIs('admin.job.create')">
+                        {{ __('Career Job') }}
+                    </x-nav-link>
                 </div>
             </div>
 

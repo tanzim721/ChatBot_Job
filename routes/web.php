@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\ChatBoxController;
+use App\Models\User;
+use App\Models\ChatBox;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Route;
+use App\Http\Resources\UserCollection;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChatBoxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WordpressController;
-use App\Models\ChatBox;
-use Illuminate\Support\Facades\Route;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Http\Resources\UserCollection;
+use App\Http\Controllers\Admin\CareerJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +52,21 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::delete('/chatbox/{chatbox}', [ChatBoxController::class, 'destroy'])->name('chatbox.destroy');
     Route::get('/chatbox/{chatbox?}', [ChatBoxController::class, 'index'])->name('chatbox');
-
     Route::get('/wordpress', [WordpressController::class, 'index'])->name('wordpress');
+
+    // Route::get('admin/career-jobs/create', [CareerJobController::class, 'create'])->name('admin.job.create');
+    // Route::post('admin/career-jobs', [CareerJobController::class, 'store'])->name('admin.job.store');
+Route::middleware('auth')->group(function () {
+    Route::resource('admin/career-jobs', CareerJobController::class)->names([
+        'index' => 'admin.job.index',
+        'create' => 'admin.job.create',
+        'store' => 'admin.job.store',
+        'show' => 'admin.job.show',
+        'edit' => 'admin.job.edit',
+        'update' => 'admin.job.update',
+        'destroy' => 'admin.job.destroy',
+    ]);
+});
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
