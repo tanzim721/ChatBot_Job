@@ -30,6 +30,7 @@ class CareerJobController extends Controller
     }
     public function store(StoreCareerJobRequest $request, CareerJobService $job)
     {
+        dd($request->validated());
         $job->store($request->validated());
         return redirect()->with('success', 'Job created');
     }
