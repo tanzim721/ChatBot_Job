@@ -2,6 +2,12 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Career Job') }}
+            <div class="float-right">
+                <a href="{{ route('admin.job.index') }}"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    View Job
+                </a>
+            </div>
         </h2>
     </x-slot>
     <div class="py-5">
@@ -9,7 +15,6 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <form action="{{ route('admin.job.store') }}" method="POST" class="p-3">
                     @csrf
-                    {{-- Job Title --}}
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="title">
                             Job Title
@@ -25,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- Job Role --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="role">
                             Job Role
@@ -41,7 +45,6 @@
                         @enderror
                     </div>
 
-                    {{-- Employment Type --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="employment_type">
                             Employment Type
@@ -62,7 +65,6 @@
                         @enderror
                     </div>
 
-                    {{-- Company Name --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="company_name">
                             Company Name
@@ -78,7 +80,6 @@
                         @enderror
                     </div>
 
-                    {{-- Apply URL --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="apply_url">
                             URL to Description/Application
@@ -94,7 +95,6 @@
                         @enderror
                     </div>
 
-                    {{-- Description --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="description">
                             Description
@@ -109,7 +109,6 @@
                         @enderror
                     </div>
 
-                    {{-- Salary --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="salary">
                             Salary
@@ -125,7 +124,6 @@
                         @enderror
                     </div>
 
-                    {{-- Company Logo --}}
                     <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="company_logo">
                             URL of the Company Logo
@@ -143,7 +141,6 @@
 
 
 
-                    {{-- Create Job Button --}}
                     <div class="mt-8">
                         <button
                             class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300"

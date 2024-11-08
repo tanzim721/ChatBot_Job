@@ -56,7 +56,6 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('admin/career-jobs/create', [CareerJobController::class, 'create'])->name('admin.job.create');
     // Route::post('admin/career-jobs', [CareerJobController::class, 'store'])->name('admin.job.store');
-Route::middleware('auth')->group(function () {
     Route::resource('admin/career-jobs', CareerJobController::class)->names([
         'index' => 'admin.job.index',
         'create' => 'admin.job.create',
@@ -66,7 +65,6 @@ Route::middleware('auth')->group(function () {
         'update' => 'admin.job.update',
         'destroy' => 'admin.job.destroy',
     ]);
-});
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
