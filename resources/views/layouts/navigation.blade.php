@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('wordpress')" :active="request()->routeIs('wordpress')">
                         {{ __('Wordpress') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.job.create')" :action="request()->routeIs('admin.job.create')">
+                    <x-nav-link :href="route('admin.job.index')" :action="request()->routeIs('admin.job.index')">
                         {{ __('Career Job') }}
                     </x-nav-link>
                 </div>
@@ -91,6 +91,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('wordpress')" :active="request()->routeIs('wordpress')">
                 {{ __('Wordpress') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.job.index')" :action="request()->routeIs('admin.job.index')">
+                {{ __('Career Job') }}
             </x-responsive-nav-link>
         </div>
 
