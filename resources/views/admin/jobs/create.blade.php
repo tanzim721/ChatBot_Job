@@ -30,7 +30,7 @@
                         @enderror
                     </div>
 
-                    <div class="mt-8">
+                    {{-- <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="role">
                             Job Role
                         </label>
@@ -137,7 +137,7 @@
                                 {{ $message }}
                             </p>
                         @enderror
-                    </div>
+                    </div> --}}
 
 
 
@@ -147,7 +147,6 @@
                             type="submit">
                             Create Job
                         </button>
-
                     </div>
                 </form>
             </div>
