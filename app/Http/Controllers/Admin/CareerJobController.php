@@ -17,7 +17,6 @@ class CareerJobController extends Controller
     {
         $conn = DB::connection('ecommerce');
         $jobs = $conn->table('career_jobs')->get();
-        // $jobs = CareerJob::orderBy('title')->get();
         return view('admin.jobs.view', compact('jobs'));
     }
 
@@ -30,6 +29,7 @@ class CareerJobController extends Controller
     }
     public function store(StoreCareerJobRequest $request, CareerJobService $job)
     {
+        dd( $request->validated());
         $job->store($request->validated());
         return redirect()->with('success', 'Job created');
     }
