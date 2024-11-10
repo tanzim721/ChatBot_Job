@@ -30,7 +30,7 @@
                         @enderror
                     </div>
 
-                    {{-- <div class="mt-8">
+                    <div class="mt-8">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="role">
                             Job Role
                         </label>
@@ -53,10 +53,9 @@
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
                             id="employment_type" name="employment_type">
                             <option disabled>Select a type of employment</option>
-
-                            <option value="remote">Remotely</option>
-                            <option value="part_time">Part Time</option>
-                            <option value="freelance">Freelance</option>
+                            @foreach (App\Enums\EmploymentType::cases() as $type)
+                                <option value="{{ $type->value }}">{{ $type->getLabel() }}</option>
+                            @endforeach
                         </select>
                         @error('employment_type')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -137,7 +136,7 @@
                                 {{ $message }}
                             </p>
                         @enderror
-                    </div> --}}
+                    </div>
 
 
 
@@ -147,6 +146,7 @@
                             type="submit">
                             Create Job
                         </button>
+
                     </div>
                 </form>
             </div>

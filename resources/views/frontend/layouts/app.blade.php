@@ -31,10 +31,13 @@
   </head>
   <body class="bg-gray-900">
     <!-- Hero Section -->
+
+
     @yield('content')
 
     <!-- Footer -->
     @include('frontend.layouts.footer')
     <!-- /Footer -->
+
   </body>
 </html>
