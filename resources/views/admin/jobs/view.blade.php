@@ -12,108 +12,65 @@
     </x-slot>
     <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+                    <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                #
+                            <th class="px-6 py-3" scope="col">
+                                Job Title
                             </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Title
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Employment Type
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
+                            <th class="px-6 py-3" scope="col">
                                 Company Name
                             </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Role
+                            <th class="px-6 py-3" scope="col">
+                                Job Role
                             </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Apply URL
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Company Logo
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Description
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
+                            <th class="px-6 py-3" scope="col">
                                 Salary
                             </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Created At
-                            </th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase dark:text-gray-400">
-                                Action
+                            <th class="px-6 py-3" scope="col">
+                                <span class="sr-only">Edit</span>
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @foreach ($jobs as $job)
-                            <tr>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    {{ $job->id }}
+                    <tbody>
+
+                        @forelse ($jobs as $job)
+                            <tr
+                                class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600">
+                                <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                                    scope="row">
+                                    <a href="{{ route('career-jobs.show', $job->id) }}">
+                                        {{ $job->title }}
+                                    </a>
+                                    <p class="text-xs opacity-50 dark:opacity-30">
+                                        {{ $job->created_at }}</p>
+                                </th>
+                                <td class="whitespace-nowrap px-6 py-4">
+                                    {{ $job->company_name }}
                                 </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->title }}</div>
+                                <td class="px-6 py-4">
+                                    {{ $job->role }}
                                 </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->employment_type }}</div>
+                                <td class="whitespace-nowrap px-6 py-4">
+                                    <span
+                                        class="me-2 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">{{ $job->salary }}</span>
                                 </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->company_name }}</div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->role }}</div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <a href="{{ $job->apply_url }}"
-                                        class="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">Apply</a>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <img src="{{ $job->company_logo }}" alt="Company Logo"
-                                        class="h-10 w-10 rounded-full">
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{!! \Illuminate\Support\Str::limit($job->description, 80) !!}</div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->salary }}</div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <div class="max-w-xs truncate">{{ $job->created_at }}</div>
-                                </td>
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    <a href="#"
-                                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">Edit</a>
+                                <td class="px-6 py-4 text-right">
+                                    <a class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                        href="">Edit</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td>empty</td>
+                                <td>empty</td>
+                                <td>empty</td>
+                                <td>empty</td>
+                                <td>empty</td>
+                            </tr>
+                        @endforelse
+
                     </tbody>
                 </table>
             </div>
