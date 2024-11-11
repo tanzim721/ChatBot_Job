@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\CareerJob;
 use Illuminate\Http\Request;
 use App\Services\CareerJobService;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,8 @@ class CareerJobController extends Controller
     public function store(StoreCareerJobRequest $request, CareerJobService $job)
     {
         // dd( $request->validated());
-        $job->store($request->validated());
+        // $job->store($request->validated());
+        $job = CareerJob::create($request->validated());
         return redirect()->with('success', 'Job created');
     }
 

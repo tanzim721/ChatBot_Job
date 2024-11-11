@@ -6,14 +6,14 @@ use App\Enums\EmploymentType;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCareerJobRequest extends FormRequest
+class UpdateCareerJobRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
