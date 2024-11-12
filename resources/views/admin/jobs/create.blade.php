@@ -54,7 +54,7 @@
                             id="employment_type" name="employment_type">
                             <option disabled>Select a type of employment</option>
                             @foreach (App\Enums\EmploymentType::cases() as $type)
-                                <option value="{{ $type->value }}">{{ $type->getLabel() }}</option>
+                                <option value="{{ $type->value }}" @selected($type->value === old('employment_type'))>{{ $type->getLabel() }}</option>
                             @endforeach
                         </select>
                         @error('employment_type')
