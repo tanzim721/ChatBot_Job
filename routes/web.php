@@ -54,8 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/chatbox/{chatbox?}', [ChatBoxController::class, 'index'])->name('chatbox');
     Route::get('/wordpress', [WordpressController::class, 'index'])->name('wordpress');
 
-    // Route::get('admin/career-jobs/create', [CareerJobController::class, 'create'])->name('admin.job.create');
-    // Route::post('admin/career-jobs', [CareerJobController::class, 'store'])->name('admin.job.store');
     Route::resource('admin/career-jobs', CareerJobController::class)->names([
         'index' => 'admin.job.index',
         'create' => 'admin.job.create',
