@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatBoxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WordpressController;
+use App\Http\Controllers\Admin\CreativeController;
 use App\Http\Controllers\Admin\CareerJobController;
 
 /*
@@ -63,6 +64,8 @@ Route::middleware('auth')->group(function () {
         'update' => 'admin.job.update',
         'destroy' => 'admin.job.destroy',
     ]);
+
+    Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('creatives', function (Blueprint $table) {
             $table->id();
-            $table->json('image');
-            $table->json('video');
+            $table->json('image')->nullable();
+            $table->json('video')->nullable();
             $table->string('content')->nullable();
             $table->string('cta_name')->nullable();
             $table->string('cta_url')->nullable();
