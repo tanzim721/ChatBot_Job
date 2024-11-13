@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <title>@yield('title', 'AdPlay Creative')</title>
 
     <style>
@@ -22,6 +26,17 @@
             background: radial-gradient(circle, rgba(11, 34, 64, 1) 0%, rgba(9, 14, 22, 1) 65%);
         }
 
+        .scroll-container {
+            min-height: 100vh;
+            overflow: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
         .nav {
             width: 100%;
             background: #2D3A43;
@@ -33,10 +48,43 @@
             margin: auto;
         }
 
+        .chat_box{
+            color: #fff;
+            padding: 10px 15px;
+        }
+        .gradient_bg {
+            background: rgb(11, 34, 64);
+            background: radial-gradient(circle, rgba(11, 34, 64, 1) 0%, rgba(9, 14, 22, 1) 65%);
+        }
+
         .gradient_border {
-            padding: 20px;
-            border: 10px solid transparent;
-            border-image: linear-gradient(45deg, #ff6b6b, #f7b7a3) 1;
+            position: relative;
+            padding: 10px 45px;
+            background: white;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .gradient_border::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(45deg, #0d2c56, #4b525c, #0d2c56, #4b525c);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .upload-box input[type="file"] {
+            outline: none;
         }
 
         .row-wrapper {
@@ -118,6 +166,14 @@
             margin-bottom: 10px;
         }
 
+        .remove-btn{
+            color: red;
+            margin-left: 10px;
+        }
+
+
+
+
 
         /* Responsive design adjustments */
         @media (max-width: 768px) {
@@ -151,6 +207,7 @@
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @livewireStyles
 </head>
@@ -163,186 +220,145 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".d-flex").style.opacity = "1";
         });
+    </script>
 
-
+    <script>
         $(document).ready(function() {
-            // Show the corresponding input section when asset type is selected
             $('#assetTypeDropdown').change(function() {
-                var selectedAsset = $(this).val();
-
-                // Hide all sections first
-                $('#imageSection, #videoSection, #contentSection, #ctaSection, #creativeNameSection').hide();
-
-                // Show image input section if 'image' is selected
-                if (selectedAsset === 'image') {
-                    $('#imageSection').fadeIn();
+                var selectedValue = $(this).val();
+                $('#inputSection, #uploadMainAssetSection, #submitButton').hide();
+                if (selectedValue === 'expemdable video') {
+                    $('#inputSection').fadeIn();
+                    // $('#inputSection').show();
+                } else if (selectedValue === 'video canvas') {
+                    $('#inputSection').show();
+                } else if (selectedValue == 'scratch') {
+                    $('#inputSection').fadeIn();
+                    // $('#inputSection').show();
+                } else if (selectedValue == 'carousel') {
+                    $('#inputSection').fadeIn();
+                    // $('#inputSection').show();
                 }
-                // Show video input section if 'video' is selected
-                else if (selectedAsset === 'video') {
-                    $('#videoSection').fadeIn();
-                }
-                $('#selectCreateCreative').show();
-                $('#selectCreateCreative').text('Select Creative');
-
-            });
-
-            // Show content input when image is selected and image is uploaded
+                $('#selectedTemplate').show();
+                $('#selectedTemplate').text("You have selected the " + selectedValue + " template");
+            })
             $('#image').change(function() {
-                if ($(this).val()) {
-                    $('#selectCreateCreative').fadeIn();
+                var imageValue = $(this).val();
+                $('#contentSection').hide();
+                if (imageValue) {
+                    $('#contentSection').fadeIn();
                 }
+                $('#contentText').show();
+                $('#contentText').text("You have selected an image");
             });
-
-            // Show content input when video is selected and video is uploaded
             $('#video').change(function() {
                 if ($(this).val()) {
                     $('#contentSection').fadeIn();
                 }
-            });
-
-            // Show CTA section when content is filled
-            $('#content').on('input', function() {
-                if ($(this).val().trim()) {
-                    $('#ctaSection').fadeIn();
-                }
-            });
-
-            // Show Creative Name input when CTA fields are filled
-            $('#cta_name, #cta_url').on('input', function() {
-                if ($('#cta_name').val().trim() && $('#cta_url').val().trim()) {
-                    $('#creativeNameSection').fadeIn();
-                }
-            });
-
-            // AJAX form submission
-            $('#creativeForm').on('submit', function(e) {
-                e.preventDefault();
-
-                let formData = new FormData(this);
-
-                $.ajax({
-                    url: '/path/to/your/server/script',  // Replace with the path to your server-side script
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        alert('Creative submitted successfully');
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred: ' + error);
-                    }
-                });
+                $('#contentText').show();
+                $('#contentText').text("You have selected video");
             });
         });
 
 
-    </script>
+        // My Vanila JS
 
+        const fileInput = document.getElementById('image');
+        const fileList = document.getElementById('file-list');
+        const inputTextSection = document.getElementById('inputTextSection');
+        const scrollContainer = document.getElementById('scroll-container');
+
+        // update the file list display
+        fileInput.addEventListener('change', () => {
+            if(fileInput.files.length !== 0) {
+                fileList.classList.remove('d-none');
+                inputTextSection.classList.remove('d-none');
+            }else {
+                fileList.classList.add('d-none');
+            }
+
+            fileList.innerHTML = '';
+            Array.from(fileInput.files).forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.textContent = file.name;
+
+                const removeButton = document.createElement('button');
+                removeButton.className = 'remove-btn';
+                removeButton.textContent = 'x';
+                removeButton.addEventListener('click', () => {
+                    removeFile(index);
+                });
+
+                fileItem.appendChild(removeButton);
+                fileList.appendChild(fileItem);
+            });
+        });
+
+        // remove a file from the list
+        function removeFile(index) {
+            const fileArray = Array.from(fileInput.files);
+            fileArray.splice(index, 1);
+
+            const dataTransfer = new DataTransfer();
+            fileArray.forEach(file => dataTransfer.items.add(file));
+            fileInput.files = dataTransfer.files;
+
+            fileInput.dispatchEvent(new Event('change'));
+        }
+
+        //textInputNo
+        document.getElementById("textInputNo").addEventListener("click", function() {
+           document.getElementById("CTAButtonContainer").classList.remove("d-none");
+        })
+
+        //textInputYes
+        document.getElementById("textInputYes").addEventListener("click", function() {
+            document.getElementById("inputTextContainer").classList.remove("d-none");
+        })
+
+        //Input Text Submit
+        document.getElementById("inputTextSubmit").addEventListener("click", function() {
+            const inputText = document.getElementById("inputText").value
+            document.getElementById("inputTextContainer2").classList.remove("d-none");
+            document.getElementById("userInputText").innerText = "Your entered: " + inputText
+            document.getElementById("CTAButtonContainer").classList.remove("d-none");
+        })
+
+        //Choose CTA Button
+        function chooseCTAButton(btn) {
+            document.getElementById("inputCTAContainer").classList.remove("d-none");
+            document.getElementById("userInputCTA").innerText = btn
+            document.getElementById("interLandingURL").classList.remove("d-none");
+        }
+
+        //Sumbit Landing URL
+        document.getElementById("inputLandingURLSubmit").addEventListener("click", function() {
+            //const landingURL = document.getElementById("inputLandingURL").value;
+            //document.getElementById("userLandingURL").innerText = "Check your URL: " + landingURL
+            document.getElementById("userLandingURLContainer").classList.remove("d-none");
+            document.getElementById("interTrackingURL").classList.remove("d-none");
+        })
+
+        //Submit Trackig URL
+        document.getElementById("inputTrackingURLSubmit").addEventListener("click", function() {
+            //const landingURL = document.getElementById("inputTrackingURL").value;
+            //document.getElementById("userTrackingURL").innerText = "Check your URL: " + landingURL
+            document.getElementById("userTrackingURLContainer").classList.remove("d-none");
+            document.getElementById("interCreativeNameContainer").classList.remove("d-none");
+        })
+
+        //Submit Creative Name
+        document.getElementById("inputCreativeNameSubmit").addEventListener("click", function() {
+            const creativeName = document.getElementById("inputCreativeName").value;
+            document.getElementById("userCreativeName").innerText = "Creative Name is: " + creativeName
+            document.getElementById("userCreativeNameContainer").classList.remove("d-none");
+            document.getElementById("generateCreativeContainer").classList.remove("d-none");
+        })
+
+    </script>
 
     @livewireScripts
 </body>
 
 </html>
-
-
-{{-- <form action="" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="scroll gradient_bg scroll-container">
-        <div class="d-flex align-items-center" style="opacity: 0; transition: opacity 1.5s ease-in-out;">
-            <div class="">
-                <p class="msg bg-transparent text-white gradient_border px-12"
-                    style="animation: fadeIn 1.5s ease-in-out forwards;">Hello, How can I
-                    help you <br>
-                    <button type="button"
-                        class="btn btn-primary btn-sm rounded-3xl mt-1 px-4 bg-[#0C2C57] border-[#3276ceb2]"
-                        id="createCreative" style="animation: fadeIn 1.5s ease-in-out forwards;">Create
-                        Creative</button>
-                </p>
-            </div>
-        </div>
-        <div class="d-flex align-items-center text-right justify-content-end">
-            <div>
-                <p class="msg d-none animate__animated animate__fadeInRight gradient_border bg-transparent text-white"
-                    id="selectCreateCreative"></p>
-            </div>
-        </div>
-        <div class="form-section d-none" id="sizeSection">
-            <label for="size"
-                class="bg-transparent text-white gradient_border animate__animated animate__fadeInLeft"
-                style="animation-delay: 0.1s;">Select Dimension</label>
-            <div class="d-flex flex-wrap gap-2">
-                <span
-                    class="CustomBadge btn btn-primary btn-sm rounded-3xl px-4 bg-[#0C2C57] border-[#3276ceb2] animate__animated animate__fadeInUp"
-                    style="animation-delay: 0.1s; cursor: pointer;" data-size="300x250">300x250</span>
-                <span
-                    class="CustomBadge btn btn-primary btn-sm rounded-3xl px-4 bg-[#0C2C57] border-[#3276ceb2] animate__animated animate__fadeInUp"
-                    style="animation-delay: 0.2s; cursor: pointer;" data-size="336x280">336x280</span>
-                <span
-                    class="CustomBadge btn btn-primary btn-sm rounded-3xl px-4 bg-[#0C2C57] border-[#3276ceb2] animate__animated animate__fadeInUp"
-                    style="animation-delay: 0.3s; cursor: pointer;" data-size="728x90">728x90</span>
-                <span
-                    class="CustomBadge btn btn-primary btn-sm rounded-3xl px-4 bg-[#0C2C57] border-[#3276ceb2] animate__animated animate__fadeInUp"
-                    style="animation-delay: 0.4s; cursor: pointer;" data-size="160x600">160x600</span>
-                <span
-                    class="CustomBadge btn btn-primary btn-sm rounded-3xl px-4 bg-[#0C2C57] border-[#3276ceb2] animate__animated animate__fadeInUp"
-                    style="animation-delay: 0.5s; cursor: pointer;" data-size="300x600">300x600</span>
-            </div>
-            <input type="hidden" name="width" id="width">
-            <input type="hidden" name="height" id="height">
-        </div>
-        <div class="d-flex align-items-center text-right justify-content-end">
-            <div>
-                <p class="animate__animated animate__fadeInRight msg d-none bg-transparent gradient_border text-white mt-3"
-                    id="selectSize"></p>
-            </div>
-        </div>
-        <div class="upload-section d-none flex" id="uploadMainAssetSection">
-            <div
-                class="animate__animated animate__fadeInLeft upload-box bg-transparent gradient_border text-white">
-                <label for="main-asset">
-                    <div class="input-box">
-                        <p class="d-none" id="uploadMainAsset"></p>
-                        <input type="file" id="main-asset"
-                            class="rounded-3xl px-4 bg-[#0C2C57] border-blue-500 mt-2 py-1" multiple
-                            name="main_asset[]">
-                    </div>
-                </label>
-                <div id="main-asset-preview"></div>
-            </div>
-        </div>
-        <div class="d-flex align-items-center text-right justify-content-end">
-            <div>
-                <p class="animate__animated animate__fadeInRight msg d-none bg-transparent gradient_border text-white mt-3"
-                    id="selectMainAsset"></p>
-            </div>
-        </div>
-        <div class="upload-section d-none flex" id="uploadLogoAssetSection">
-            <div
-                class="animate__animated animate__fadeInLeft upload-box bg-transparent gradient_border text-white">
-                <label for="logo-asset">
-                    <div class="input-box">
-                        <p class="d-none" id="uploadLogoAsset"></p>
-                        <input type="file" id="logo-asset"
-                            class="rounded-3xl px-4 bg-[#0C2C57] border-blue-500 mt-2 py-1" multiple
-                            name="logo_asset">
-                    </div>
-                </label>
-                <div id="logo-asset-preview"></div>
-            </div>
-        </div>
-        <div class="d-flex align-items-center text-right justify-content-end">
-            <div>
-                <p class="animate__animated animate__fadeInRight msg d-none bg-transparent gradient_border text-white mt-3"
-                    id="selectLogoAsset"></p>
-            </div>
-        </div>
-    </div>
-    <div class="gradient_bg d-flex align-items-center text-right justify-content-end py-3 pe-2">
-        <div>
-            <button class="btn btn-success d-none" id="submitButton" type="submit">
-                Generate Creative
-            </button>
-        </div>
-    </div>
-</form> --}}

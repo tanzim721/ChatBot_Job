@@ -66,6 +66,10 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
+    Route::post('admin/creative', [CreativeController::class, 'store'])->name("admin.creative.store");
+    // Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
+    // Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
