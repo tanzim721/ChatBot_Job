@@ -65,11 +65,10 @@ Route::middleware('auth')->group(function () {
         'destroy' => 'admin.job.destroy',
     ]);
 
-    Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
+    Route::get('admin/creative/create', [CreativeController::class, 'create'])->name("admin.creative");
+    Route::get('admin/creative/list', [CreativeController::class, 'index'])->name("admin.creative");
     Route::post('admin/creative', [CreativeController::class, 'store'])->name("admin.creative.store");
     // Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
-    // Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
