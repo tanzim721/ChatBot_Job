@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\EmploymentType;
+use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,14 @@ class CareerJobFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->realText(50),
+            'employment_type' => fake()->randomElement(EmploymentType::cases()),
+            'company_name' => fake()-> company(),
+            'role' => fake()->jobTitle(),
+            'apply_url' => fake()->url(),
+            'company_logo' => fake()->imageUrl(100, 100),
+            'description' => fake()->realText(500),
+            'salary' => fake()->numberBetween(1000, 10000),
         ];
     }
 }

@@ -16,8 +16,9 @@ class CareerJobController extends Controller
      */
     public function index()
     {
-        $conn = DB::connection('ecommerce');
-        $jobs = $conn->table('career_jobs')->get();
+        // $conn = DB::connection('ecommerce');
+        // $jobs = $conn->table('career_jobs')->get();
+        $jobs = CareerJob::latest()->paginate(5);
         return view('admin.jobs.view', compact('jobs'));
     }
 
@@ -28,12 +29,13 @@ class CareerJobController extends Controller
     {
         return view('admin.jobs.create');
     }
-    public function store(StoreCareerJobRequest $request, CareerJobService $job)
+    public function store(StoreCareerJobRequest $request)
     {
         // dd( $request->validated());
         // $job->store($request->validated());
-        $job = CareerJob::create($request->validated());
-        return redirect()->with('success', 'Job created');
+
+        CareerJob::create($request->validated());
+        return to_route('admin.job.index');
     }
 
     /**

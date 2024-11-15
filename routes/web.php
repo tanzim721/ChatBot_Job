@@ -65,10 +65,15 @@ Route::middleware('auth')->group(function () {
         'destroy' => 'admin.job.destroy',
     ]);
 
-    Route::get('admin/creative/create', [CreativeController::class, 'create'])->name("admin.creative");
-    Route::get('admin/creative/list', [CreativeController::class, 'index'])->name("admin.creative");
-    Route::post('admin/creative', [CreativeController::class, 'store'])->name("admin.creative.store");
-    // Route::get('admin/creative', [CreativeController::class, 'index'])->name("admin.creative");
+    Route::get('admin/creative/view', [CreativeController::class, 'view'])->name("admin.creative");
+    Route::get('admin/creative/add', [CreativeController::class, 'add'])->name("admin.creative");
+    Route::post('admin/creative/stores', [CreativeController::class, 'store'])->name("admin.creative.store");
+    // Route::get('/admin/creative/view', [CreativeController::class, 'view'])->name('admin.product.view');
+    // Route::get('/admin/creative/add', [CreativeController::class, 'add'])->name('admin.product.add');
+    // Route::post('/admin/creative/store', [CreativeController::class, 'store'])->name('admin.product.store');
+    // Route::get('/admin/creative/edit/{id}', [CreativeController::class, 'edit'])->name('admin.product.edit');
+    // Route::get('/admin/creative/delete/{id}', [CreativeController::class, 'delete'])->name('admin.product.delete');
+    // Route::post('/admin/creative/update/{id}', [CreativeController::class, 'update'])->name('admin.product.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
