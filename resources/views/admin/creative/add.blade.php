@@ -26,7 +26,7 @@
                                         <option class="text-black" value="scratch">Scratch</option>
                                         <option class="text-black" value="carousel">Carousel</option> --}}
                                         @foreach ($creative_types as $creative_type)
-                                            <option class="text-black" value="{{ $creative_type->id }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
+                                            <option class="text-black" value="{{ $creative_type->name }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -74,7 +74,7 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Write your text below:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputText" placeholder="Enter text here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputText" name="inputText" placeholder="Enter text here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputTextSubmit">&#8594;</button>
                             </div>
                         </div>
@@ -93,17 +93,17 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Select CTA button:</p>
                             <div class="flex gap-2">
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('BUY NOW')">BUY NOW</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('BUY NOW')">BUY NOW</button>
 
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('CLICK')">CLICK</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('CLICK')">CLICK</button>
 
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('PLAY')">PLAY</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('PLAY')">PLAY</button>
 
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('WATCH')">WATCH</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('WATCH')">WATCH</button>
 
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('VIEW')">VIEW</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('VIEW')">VIEW</button>
 
-                                <button type="button" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('WIN')">WIN</button>
+                                <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('WIN')">WIN</button>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Input Landing URL:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputLandingURL" placeholder="Enter URL here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputLandingURL" name="inputLandingURL" placeholder="Enter URL here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputLandingURLSubmit">&#8594;</button>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Input Tracking URL:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputTrackingURL" placeholder="Enter URL here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputTrackingURL" name="inputTrackingURL" placeholder="Enter URL here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputTrackingURLSubmit">&#8594;</button>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Give Creative Name:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputCreativeName" placeholder="Enter name here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputCreativeName" name="inputCreativeName" placeholder="Enter name here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputCreativeNameSubmit">&#8594;</button>
                             </div>
                         </div>
@@ -177,12 +177,10 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">You are ready to go, Generate your Creative.</p>
                             <div>
-                                <button type="button" class="border px-3 py-1 mt-2 rounded-md bg-blue-500 mt-2 hover:scale-105 transition ease-in-out duration-150" >Generate Creative</button>
+                                <button type="submit" class="border px-3 py-1 mt-2 rounded-md bg-blue-500 mt-2 hover:scale-105 transition ease-in-out duration-150" >Generate Creative</button>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="d-flex align-items-center text-right justify-content-end py-3 pe-2">
