@@ -24,7 +24,7 @@
                     <x-nav-link :href="route('admin.job.index')" :action="request()->routeIs('admin.job.index')">
                         {{ __('Career Job') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.creative')" :action="request()->routeIs('admin.creative')">
+                    <x-nav-link :href="route('admin.creative.add')" :action="request()->routeIs('admin.creative.add')">
                         {{ __('Creative') }}
                     </x-nav-link>
                 </div>

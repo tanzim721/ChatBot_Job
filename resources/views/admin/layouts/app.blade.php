@@ -227,15 +227,15 @@
             $('#assetTypeDropdown').change(function() {
                 var selectedValue = $(this).val();
                 $('#inputSection, #uploadMainAssetSection, #submitButton').hide();
-                if (selectedValue === 'expemdable video') {
+                if (selectedValue === 'Video') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
-                } else if (selectedValue === 'video canvas') {
+                } else if (selectedValue === 'Image') {
                     $('#inputSection').show();
-                } else if (selectedValue == 'scratch') {
+                } else if (selectedValue == 'Scratch') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
-                } else if (selectedValue == 'carousel') {
+                } else if (selectedValue == 'Carousel') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
                 }
