@@ -29,6 +29,7 @@
                                             <option class="text-black" value="{{ $creative_type->name }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
                                         @endforeach
                                     </select>
+                                    <input type="hidden" name="{{ $creative_type->name }}" id="assetType">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +75,7 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Write your text below:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputText" name="inputText" placeholder="Enter text here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputText" name="content" placeholder="Enter text here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputTextSubmit">&#8594;</button>
                             </div>
                         </div>
@@ -93,6 +94,10 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Select CTA button:</p>
                             <div class="flex gap-2">
+                                {{-- <span class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" data-size="buy">BUY NOW</span>
+                                <span class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" data-size="click">CLICK</span>
+                                <span class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" data-size="click">PLAY</span> --}}
+
                                 <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('BUY NOW')">BUY NOW</button>
 
                                 <button type="button" name="ctaButton" class="rounded-md px-4 border-[#3276ceb2] py-1 mt-2  bg-blue-500 text-sm hover:scale-105 transition ease-in-out duration-150" onclick="chooseCTAButton('CLICK')">CLICK</button>
@@ -121,8 +126,9 @@
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Input Landing URL:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputLandingURL" name="inputLandingURL" placeholder="Enter URL here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputLandingURL" name="cta_url" placeholder="Enter URL here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputLandingURLSubmit">&#8594;</button>
+
                             </div>
                         </div>
                     </div>
@@ -135,31 +141,14 @@
                         </div>
                     </div>
 
-                    <!-- Inter Tracking URL -->
-                    <div class="d-flex align-items-center text-right justify-content-start d-none" id="interTrackingURL">
-                        <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
-                            <p class="">Input Tracking URL:</p>
-                            <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="url" id="inputTrackingURL" name="inputTrackingURL" placeholder="Enter URL here"/>
-                                <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputTrackingURLSubmit">&#8594;</button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- User's Input Tracking URL Container -->
-                    <div class="d-flex align-items-center text-right justify-content-end d-none" id="userTrackingURLContainer">
-                        <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInRight" >
-                            <p>Your Tracking URL has been received.</p>
-                          <!--  <p id="userTrackingURL"></p> -->
-                        </div>
-                    </div>
 
                     <!-- Inter Creative Name -->
                     <div class="d-flex align-items-center text-right justify-content-start d-none" id="interCreativeNameContainer">
                         <div class="mt-2 bg-transparent gradient_border chat_box flex flex-col items-start animate__animated animate__fadeInLeft" >
                             <p class="">Give Creative Name:</p>
                             <div>
-                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputCreativeName" name="inputCreativeName" placeholder="Enter name here"/>
+                                <input class="border-2 border-blue-700 rounded-lg px-2 py-1 mt-2 bg-blue-200 text-black" type="text" id="inputCreativeName" name="creative_name" placeholder="Enter name here"/>
                                 <button type="button" class="border px-2 py-1 mt-2 rounded-md hover:bg-blue-500 mt-2" id="inputCreativeNameSubmit">&#8594;</button>
                             </div>
                         </div>
