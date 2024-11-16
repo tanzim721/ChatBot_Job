@@ -13,4 +13,9 @@ class CreativeType extends Model
         'name'
     ];
 
+    public function creatives()
+    {
+        return $this->hasMany(Creative::class);
+    }
+
 }

@@ -30,7 +30,7 @@
                                 {{-- <td class="basis-3/12 md:basis-2/12">Active</td> --}}
                                 <td class="basis-4/12 flex flex-col md:flex-row gap-2 text-sm">
                                     <button class="bg-black h-8 flex justify-center items-center py-2 px-5 rounded-2xl">
-                                        <a href="{{ route('carousel.show', $item->id) }}">
+                                        <a href="">
                                             View
                                         </a>
                                     </button>
