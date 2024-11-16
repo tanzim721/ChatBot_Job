@@ -227,15 +227,15 @@
             $('#assetTypeDropdown').change(function() {
                 var selectedValue = $(this).val();
                 $('#inputSection, #uploadMainAssetSection, #submitButton').hide();
-                if (selectedValue === 'Video') {
+                if (selectedValue === '1') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
-                } else if (selectedValue === 'Image') {
+                } else if (selectedValue === '2') {
                     $('#inputSection').show();
-                } else if (selectedValue == 'Scratch') {
+                } else if (selectedValue == '3') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
-                } else if (selectedValue == 'Carousel') {
+                } else if (selectedValue == '4') {
                     $('#inputSection').fadeIn();
                     // $('#inputSection').show();
                 }

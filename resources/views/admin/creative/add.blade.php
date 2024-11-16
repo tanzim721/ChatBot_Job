@@ -19,14 +19,14 @@
                                 <p class="py-2" style="color: white">Want to create a new creative or use an existing template?</p>
                                 <div class="dropdown mb-2 text-black w-56">
 
-                                    <select id="assetTypeDropdown" class="bg-transparent text-white" style="border-radius: 5px; width: 100%;">
+                                    <select id="assetTypeDropdown" name="creative_type_id" class="bg-transparent text-white" style="border-radius: 5px; width: 100%;">
                                         <option class="text-black" value="">Select Asset Type</option>
                                         {{-- <option class="text-black" value="expemdable video">Expendable Video</option>
                                         <option class="text-black" value="video canvas">Video Canvas</option>
                                         <option class="text-black" value="scratch">Scratch</option>
                                         <option class="text-black" value="carousel">Carousel</option> --}}
                                         @foreach ($creative_types as $creative_type)
-                                            <option class="text-black" value="{{ $creative_type->name }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
+                                            <option class="text-black" value="{{ $creative_type->id }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
                                         @endforeach
                                     </select>
                                     <input type="hidden" name="{{ $creative_type->name }}" id="assetType">
