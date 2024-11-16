@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Creative;
 use App\Models\CreativeType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -24,40 +25,41 @@ class CreativeController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'title' => 'required | max:50',
-            'description' => ['required', 'max:400'],
-            'category_id' => 'required',
-            'price' => 'required',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
-            'status' => 'required',
-            'quantity' => 'required'
+            'content' => 'nullable | max:50',
+            'cta_url' => 'required',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
+            'video.*' => 'nullable|mimes:mp4,avi,mov|max:20480',
+            'creative_name' => 'required | max:50',
+            'cta' => 'nullable'
         ]);
 
-        $filePaths = [];
         // Check if files exist in the request
         if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $file) {
-                // Store each file and get its storage path
-                $path = $file->store('images', 'public');
-                $filePaths[] = $path;
+            $filePaths = [];
+            foreach ($request->file('image') as $key => $file) {
+                $imageName1 = strtotime('now') . $key . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads'), $imageName1);
+                $filePaths[] = $imageName1;
             }
         }
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        if ($request->hasFile('video')) {
+            $filePaths = [];
+            foreach ($request->file('video') as $key => $file) {
+                $videoName1 = strtotime('now') . $key . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads'), $videoName1);
+                $filePaths1[] = $videoName1;
+            }
         }
-        // $imageName = time() . '.' . $request->image->extension();
-        // $request->image->move(public_path('images/products'), $imageName);
-        $product = new Product();
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->category_id = $request->category_id;
-        $product->price = $request->price;
-        $product->image = json_encode($filePaths);
-        $product->quantity = $request->quantity;
-        $product->status = $request->status;
-        $product->save();
+        $creative = new Creative;
+        $creative->creative_type_id = 1;
+        $creative->content = $request->content;
+        $creative->cta_url = $request->cta_url;
+        $creative->image = json_encode($filePaths);
+        // $creative->video = json_encode($filePaths1);
+        $creative->creative_name = $request->creative_name;
+        $creative->cta_name = $request->cta;
+        $creative->save();
         return redirect()->route('admin.product.view')->with('message', 'Product Added Successfully');
     }
 

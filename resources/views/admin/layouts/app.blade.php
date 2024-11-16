@@ -337,14 +337,6 @@
             //const landingURL = document.getElementById("inputLandingURL").value;
             //document.getElementById("userLandingURL").innerText = "Check your URL: " + landingURL
             document.getElementById("userLandingURLContainer").classList.remove("d-none");
-            document.getElementById("interTrackingURL").classList.remove("d-none");
-        })
-
-        //Submit Trackig URL
-        document.getElementById("inputTrackingURLSubmit").addEventListener("click", function() {
-            //const landingURL = document.getElementById("inputTrackingURL").value;
-            //document.getElementById("userTrackingURL").innerText = "Check your URL: " + landingURL
-            document.getElementById("userTrackingURLContainer").classList.remove("d-none");
             document.getElementById("interCreativeNameContainer").classList.remove("d-none");
         })
 
