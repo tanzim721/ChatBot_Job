@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CreativeType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Creative extends Model
 {
@@ -18,4 +19,9 @@ class Creative extends Model
         'cta_url',
         'creative_name',
     ];
+
+    public function creativeType()
+    {
+        return $this->belongsTo(CreativeType::class);
+    }
 }
