@@ -27,7 +27,7 @@ class CreativeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'content' => 'nullable | max:50',
-            'cta_url' => 'required',
+            'landing_url' => 'required',
             'creative_type_id' => 'required',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'video.*' => 'nullable|mimes:mp4,avi,mov|max:20480',
@@ -55,7 +55,7 @@ class CreativeController extends Controller
         $creative = new Creative;
         $creative->creative_type_id = $request->creative_type_id;
         $creative->content = $request->content;
-        $creative->cta_url = $request->cta_url;
+        $creative->landing_url = $request->cta_url;
         $creative->image = json_encode($filePaths);
         // $creative->video = json_encode($filePaths1);
         $creative->creative_name = $request->creative_name;
