@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('creatives', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('creative_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('creative_type_id')->nullable()->constrained('creative_types')->nullOnDelete();
             $table->json('image')->nullable();
             $table->json('video')->nullable();
             $table->string('content')->nullable();
             $table->string('cta_name')->nullable();
-            $table->string('cta_url')->nullable();
+            $table->string('landing_url')->nullable();
+            $table->string('tracking_url')->nullable();
             $table->string('creative_name')->nullable();
             $table->timestamps();
         });
