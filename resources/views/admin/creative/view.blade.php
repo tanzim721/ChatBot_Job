@@ -26,18 +26,19 @@
                             <tr class="h-auto md:h-12 row-wrapper mt-3 py-2 md:py-0">
                                 <td class="basis-1/12 md:basis-2/12">{{ $loop->iteration }}</td>
                                 <td class="basis-4/12 md:basis-3/12 text-uppercase">{{ $item->creative_name }}</td>
-                                <td class="basis-2/12 hidden md:block">Scratch</td>
+                                <td class="basis-2/12 hidden md:block">{{ $item->template }}</td>
                                 {{-- <td class="basis-3/12 md:basis-2/12">Active</td> --}}
                                 <td class="basis-4/12 flex flex-col md:flex-row gap-2 text-sm">
                                     <button class="bg-black h-8 flex justify-center items-center py-2 px-5 rounded-2xl">
-                                        <a href="">
+                                        <a href="{{ route('admin.creative.view', $item->id) }}">
                                             View
                                         </a>
                                     </button>
-                                    <button
-                                        class="bg-indigo-500 h-8 flex justify-center items-center py-2 px-5 rounded-2xl">Tag</button>
-                                    <button
-                                        class="bg-blue-500 h-8 flex justify-center items-center py-2 px-5 rounded-2xl">Edit</button>
+                                    {{-- <button class="bg-indigo-500 h-8 flex justify-center items-center py-2 px-5 rounded-2xl">Tag</button> --}}
+                                    <button class="bg-blue-500 h-8 flex justify-center items-center py-2 px-5 rounded-2xl">Edit</button>
+                                    <button class="bg-red-500 h-8 flex justify-center items-center py-2 px-5 rounded-2xl">
+                                        <a href="{{ route('admin.creative.delete', $item->id) }}">Delete</a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

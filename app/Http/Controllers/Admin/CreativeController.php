@@ -14,7 +14,7 @@ class CreativeController extends Controller
     public function view()
     {
         $creatives = Creative::with('creativeType')->paginate(5);
-        // dd($creatives);
+        dd($creatives);
         return view('admin.creative.view', compact('creatives'));
     }
     public function add()
@@ -102,10 +102,10 @@ class CreativeController extends Controller
     //     return redirect()->route('admin.product.view')->with('message', 'Product Updated Successfully');
     // }
 
-    // public function delete($id)
-    // {
-    //     $product = Product::find($id);
-    //     $product->delete();
-    //     return redirect()->route('admin.product.view')->with('message', 'Product Deleted Successfully');
-    // }
+    public function delete($id)
+    {
+        $product = Creative::find($id);
+        $product->delete();
+        return redirect()->route('admin.creative.view')->with('message', 'Creative Deleted Successfully');
+    }
 }

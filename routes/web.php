@@ -72,6 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/creative/delete/{id}', [CreativeController::class, 'delete'])->name('admin.creative.delete');
     Route::post('/admin/creative/update/{id}', [CreativeController::class, 'update'])->name('admin.creative.update');
 
+    Route::get('/admin/creative/show', [CreativeController::class, 'show'])->name('admin.creative.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
