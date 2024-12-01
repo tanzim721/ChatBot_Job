@@ -26,13 +26,14 @@ class CreativeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'content' => 'nullable | max:50',
-            'landing_url' => 'required',
             'creative_type_id' => 'required',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'video.*' => 'nullable|mimes:mp4,avi,mov|max:20480',
+            'content' => 'nullable | max:50',
+            'cta_name' => 'required | max:50',
+            'landing_url' => 'required',
+            'tracking_url' => 'required | max:50',
             'creative_name' => 'required | max:50',
-            'cta' => 'nullable'
         ]);
 
         // Check if files exist in the request
@@ -55,11 +56,12 @@ class CreativeController extends Controller
         $creative = new Creative;
         $creative->creative_type_id = $request->creative_type_id;
         $creative->content = $request->content;
-        $creative->landing_url = $request->cta_url;
+        $creative->landing_url = $request->landing_url;
+        $creative->tracking_url = $request->tracking_url;
         $creative->image = json_encode($filePaths);
         // $creative->video = json_encode($filePaths1);
         $creative->creative_name = $request->creative_name;
-        $creative->cta_name = $request->cta;
+        $creative->cta_name = $request->cta_name;
         $creative->save();
         return redirect()->route('admin.creative.view')->with('message', 'Product Added Successfully');
     }

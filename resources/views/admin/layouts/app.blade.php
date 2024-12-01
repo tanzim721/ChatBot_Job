@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
     <title>@yield('title', 'AdPlay Creative')</title>
 
     <style>
@@ -18,6 +21,9 @@
             box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
+
+        
+
 
         .dashboard {
             width: 100%;
@@ -48,14 +54,19 @@
             margin: auto;
         }
 
-        .chat_box{
+        .chat_box {
             color: #fff;
             padding: 10px 15px;
         }
+
         .gradient_bg {
             background: rgb(11, 34, 64);
             background: radial-gradient(circle, rgba(11, 34, 64, 1) 0%, rgba(9, 14, 22, 1) 65%);
         }
+
+        
+
+
 
         .gradient_border {
             position: relative;
@@ -121,6 +132,11 @@
             background: #555;
         }
 
+        #fontSizeInput::placeholder {
+            color: white;
+            opacity: 1;
+        }
+
         .wrapper {
             height: auto;
             display: flex;
@@ -166,7 +182,7 @@
             margin-bottom: 10px;
         }
 
-        .remove-btn{
+        .remove-btn {
             color: red;
             margin-left: 10px;
         }
@@ -209,6 +225,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     @livewireStyles
 </head>
 
@@ -223,9 +240,11 @@
     </script>
 
     <script>
+        let selectedValue = null;
+
         $(document).ready(function() {
             $('#assetTypeDropdown').change(function() {
-                var selectedValue = $(this).val();
+               selectedValue = $(this).val();
                 $('#inputSection, #uploadMainAssetSection, #submitButton').hide();
                 if (selectedValue === '1') {
                     $('#inputSection').fadeIn();
@@ -237,10 +256,13 @@
                     // $('#inputSection').show();
                 } else if (selectedValue == '4') {
                     $('#inputSection').fadeIn();
-                    // $('#inputSection').show();
+                }else{
+                    $('#inputSection').fadeIn();
                 }
                 $('#selectedTemplate').show();
-                $('#selectedTemplate').text("You have selected the " + selectedValue + " template");
+                $('#selectedTemplate').text(`You have selected the template`);
+
+                // $('#selectedTemplate').text("You have selected a template");
             })
             $('#image').change(function() {
                 var imageValue = $(this).val();
@@ -258,8 +280,8 @@
                 $('#contentText').show();
                 $('#contentText').text("You have selected video");
             });
+            
         });
-
 
         // My Vanila JS
 
@@ -268,35 +290,212 @@
         const inputTextSection = document.getElementById('inputTextSection');
         const scrollContainer = document.getElementById('scroll-container');
 
-        // update the file list display
+        // handle file selection
+        const assetTypeDropdown = document.getElementById('assetTypeDropdown');
+        const mainAssetErrorMSG = document.querySelector("#main-asset-error");
+
+        assetTypeDropdown.addEventListener('change', () => {
+            selectedValue = parseInt(assetTypeDropdown.value);
+            mainAssetErrorMSG.classList.remove("d-none");
+            mainAssetErrorMSG.style.color = "green";
+
+            if(selectedValue == 1){
+                mainAssetErrorMSG.innerText = "Please select 2 Images*";
+            }else if(selectedValue == 2){
+                mainAssetErrorMSG.innerText = "Please select 3 Images*";
+            }else if(selectedValue == 3){
+                mainAssetErrorMSG.innerText = "Please select 1 Video*";
+            }else if(selectedValue == 4){
+                mainAssetErrorMSG.innerText = "Please select 1 Video & 6 Images*";
+            }else if(selectedValue == 5){
+                mainAssetErrorMSG.innerText = "Please select 1 Video & 6 Images*";
+            }else if(selectedValue == 6){
+                mainAssetErrorMSG.innerText = "Please select 3 Images*";
+            }else if(selectedValue == 7){
+                mainAssetErrorMSG.innerText = "Please select 10 Images*";
+            }else if(selectedValue == 8){
+                mainAssetErrorMSG.innerText = "Please select 1 Images*";
+            }else if(selectedValue == 9){
+                mainAssetErrorMSG.innerText = "Please select 3 Images*";
+            }else if(selectedValue == 10){
+                mainAssetErrorMSG.innerText = "Please select 2 Images*";
+            }else if(selectedValue == 11){
+                mainAssetErrorMSG.innerText = "Please select 13 Images*";
+            }else if(selectedValue == 12){
+                mainAssetErrorMSG.innerText = "Please select 5 Images*";
+            }else if(selectedValue == 13){
+                mainAssetErrorMSG.innerText = "Please select 6 Images*";
+            }else{
+                mainAssetErrorMSG.innerText = "";
+            }                            
+        });
+
+
+        // update the file list selection based on the selected value
+        fileInput.addEventListener('click', () => {    
+            if (selectedValue == 1 || selectedValue == 2 || selectedValue == 6 || selectedValue == 7 || selectedValue == 8 || selectedValue == 9 || selectedValue == 10 ||selectedValue == 11 ||selectedValue == 12 ||selectedValue == 13) {       
+                fileInput.setAttribute('accept', 'image/jpeg, image/png, image/gif');
+            }else if(selectedValue == 4 || selectedValue == 5) {
+                fileInput.setAttribute('accept', 'image/jpeg, image/png, image/gif, video/mp4, video/mkv, video/webm');
+            }else if (selectedValue == 3) {
+                fileInput.setAttribute('accept', 'video/mp4, video/mkv, video/webm');
+            }
+        });    //new
+
         fileInput.addEventListener('change', () => {
-            if(fileInput.files.length !== 0) {
+            const selectedFiles = Array.from(fileInput.files);
+
+            const images = selectedFiles.filter(file => file.type.startsWith("image/"));
+            const videos = selectedFiles.filter(file => file.type.startsWith("video/"));
+
+            console.log("Images: ", images)
+            console.log("Videos: ", videos)
+
+            //Setected Asset Validation
+            let imageCount = 0;
+            let videoCount = 0;
+
+            selectedFiles.forEach(file => {
+                if (file.type.startsWith("image/")) {
+                    imageCount++; 
+                } else if (file.type.startsWith("video/")) {
+                    videoCount++;
+                }
+            });
+
+            if(selectedValue == 1){
+                if (imageCount === 2) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 2){
+                if (imageCount === 3) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 3){
+                if (videoCount === 1) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 4){
+                if (videoCount === 1 && imageCount === 6) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 5){
+                if (videoCount === 1 && imageCount === 6) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 6){
+                if (imageCount === 3) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 7){
+                if (imageCount === 10) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 8){
+                if (imageCount === 1) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 9){
+                if (imageCount === 3) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 10){
+                if (imageCount === 2) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 11){
+                if (imageCount === 13) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 12){
+                if (imageCount === 5) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }else if(selectedValue == 13){
+                if (imageCount === 6) {
+                    mainAssetErrorMSG.style.color = "green";
+                } else {
+                    mainAssetErrorMSG.style.color = "red";
+                }
+            }
+
+         
+
+            if (selectedFiles.length > 0) {
+            const firstImage = selectedFiles[0];
+            
+            if (firstImage.type.startsWith('image/')) {
+                const reader = new FileReader();
+                const imagePreview = document.getElementById('ImagePreview');
+
+                reader.onload = function (e) {
+                    console.log('Image loaded:', e.target.result);  
+                    imagePreview.style.backgroundImage = `url(${e.target.result})`;
+                };
+
+                reader.readAsDataURL(firstImage);  
+            } else {
+                console.log('The selected file is not an image');
+            }
+            }
+
+
+            if(selectedFiles.length > 0) {
                 fileList.classList.remove('d-none');
                 inputTextSection.classList.remove('d-none');
             }else {
                 fileList.classList.add('d-none');
             }
-
+    
+            fileList.classList.remove('d-none');
+            inputTextSection.classList.remove('d-none');
             fileList.innerHTML = '';
-            Array.from(fileInput.files).forEach((file, index) => {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-                fileItem.textContent = file.name;
 
-                const removeButton = document.createElement('button');
-                removeButton.className = 'remove-btn';
-                removeButton.textContent = 'x';
-                removeButton.addEventListener('click', () => {
-                    removeFile(index);
-                });
+            selectedFiles.forEach((file, index) => {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.textContent = file.name;
 
-                fileItem.appendChild(removeButton);
-                fileList.appendChild(fileItem);
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-btn';
+            removeButton.textContent = 'x';
+            removeButton.addEventListener('click', () => {
+                removeFile(index);
             });
+
+            fileItem.appendChild(removeButton);
+            fileList.appendChild(fileItem);
         });
+    });
+
+
 
         // remove a file from the list
-        function removeFile(index) {
+        function removeFile(index) {           
             const fileArray = Array.from(fileInput.files);
             fileArray.splice(index, 1);
 
@@ -325,11 +524,28 @@
             document.getElementById("CTAButtonContainer").classList.remove("d-none");
         })
 
+        let btnValue;
+
         //Choose CTA Button
         function chooseCTAButton(btn) {
             document.getElementById("inputCTAContainer").classList.remove("d-none");
+
+            if(selectedValue == 1 || selectedValue == 2) {
+                document.getElementById("ImagePreview").classList.remove("d-none")
+            }else{
+                document.getElementById("videoSelected").classList.remove("d-none")
+            }
+
+            if(selectedValue != 5){
+                document.getElementById("colorCodeContainer").classList.remove("d-none");
+            }
             document.getElementById("userInputCTA").innerText = btn
+            document.getElementById("campaignNameShow").innerText = document.getElementById("inputText").value
+            btnValue = btn;
+            document.getElementById("userInputCTA2").innerText = btn
             document.getElementById("interLandingURL").classList.remove("d-none");
+            console.log(btnValue);
+                
         }
 
         //Sumbit Landing URL
@@ -337,6 +553,12 @@
             //const landingURL = document.getElementById("inputLandingURL").value;
             //document.getElementById("userLandingURL").innerText = "Check your URL: " + landingURL
             document.getElementById("userLandingURLContainer").classList.remove("d-none");
+            document.getElementById("interTrackingURL").classList.remove("d-none");
+        })
+
+        //Sumbit Tracking URL
+        document.getElementById("inputTrackingURLSubmit").addEventListener("click", function() {
+            document.getElementById("userTrackingURLContainer").classList.remove("d-none");
             document.getElementById("interCreativeNameContainer").classList.remove("d-none");
         })
 
@@ -348,8 +570,114 @@
             document.getElementById("generateCreativeContainer").classList.remove("d-none");
         })
 
-    </script>
+        //Change Campaign Name's Color
+        document.getElementById("colorCodeSubmit").addEventListener("click", function() {
+            let colorCode = document.getElementById("inputColorCode").value
+            console.log(colorCode)
+            document.getElementById("campaignNameShow").classList.add(`text-[${colorCode}]`);
+        })
 
+        const fontSizeInput = document.getElementById('fontSizeInput');
+
+        fontSizeInput.addEventListener('input', () => {
+        const fontSizeValue = fontSizeInput.value;
+            if (fontSizeValue) {
+                document.getElementById("campaignNameShow").style.fontSize = `${fontSizeValue}px`;
+            }
+        });
+
+
+        const pickr = Pickr.create({
+        el: '#color-picker',
+        theme: 'nano',
+        default: '#ff0000',
+
+        appClass: 'custom-class',
+        useAsButton: true,
+
+
+        swatches: [
+        'rgba(0, 0, 0, 1)',
+        'rgba(255, 255, 255, 1)',
+        'rgba(244, 67, 54, 1)',
+        'rgba(233, 30, 99, 0.95)',
+        'rgba(156, 39, 176, 0.9)',
+        'rgba(103, 58, 183, 0.85)',
+        'rgba(63, 81, 181, 0.8)',
+        'rgba(33, 150, 243, 0.75)',
+        'rgba(3, 169, 244, 0.7)',
+        'rgba(0, 188, 212, 0.7)',
+        'rgba(0, 150, 136, 0.75)',
+        'rgba(76, 175, 80, 0.8)',
+        'rgba(139, 195, 74, 0.85)',
+        'rgba(205, 220, 57, 0.9)',
+        ],
+
+        components: {
+        preview: true,
+        opacity: true,
+        hue: true,
+
+            interaction: {
+                input: true,
+            },
+        },
+        });
+
+        // Handle color selection
+        pickr.on('change', (color) => {
+            const rgbaColor = color.toHEXA().toString(); // Get the color in HEXA format
+            //console.log('Selected color:', rgbaColor);
+            const element = document.getElementById("campaignNameShow");           
+            element.style.color = rgbaColor;
+        });
+
+
+        //Drag and Drop
+        const makeDraggable = (element, container) => {
+        let offsetX = 0;
+        let offsetY = 0;
+        let isDragging = false;
+
+        element.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            offsetX = event.clientX - element.getBoundingClientRect().left;
+            offsetY = event.clientY - element.getBoundingClientRect().top;
+            document.body.style.userSelect = 'none'; // Disable text selection during drag
+        });
+
+        document.addEventListener('mousemove', (event) => {
+        if (isDragging) {
+        const containerRect = container.getBoundingClientRect();
+
+        let newLeft = event.clientX - offsetX;
+        let newTop = event.clientY - offsetY;
+
+        newLeft = Math.max(containerRect.left, Math.min(newLeft, containerRect.right - element.offsetWidth));
+        newTop = Math.max(containerRect.top, Math.min(newTop, containerRect.bottom - element.offsetHeight));
+
+        element.style.left = `${newLeft - containerRect.left}px`;
+        element.style.top = `${newTop - containerRect.top}px`;
+        element.style.position = 'absolute'; 
+        element.style.zIndex = '1000';
+        }
+        });
+
+        document.addEventListener('mouseup', () => {
+        isDragging = false;
+         document.body.style.userSelect = ''; 
+        });
+    };
+
+    const imagePreview = document.getElementById('ImagePreview');
+    const campaignNameShow = document.getElementById('campaignNameShow');
+    const userInputCTA2 = document.getElementById('userInputCTA2');
+
+    makeDraggable(campaignNameShow, imagePreview);
+    makeDraggable(userInputCTA2, imagePreview);
+
+    //End Drag and Drop
+    </script>
     @livewireScripts
 </body>
 
