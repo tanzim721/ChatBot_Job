@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('admin.creative.add')" :action="request()->routeIs('admin.creative.add')">
                         {{ __('Creative') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.post.index')" :action="request()->routeIs('admin.post.index')">
+                        {{ __('Blog') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -97,6 +100,10 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.job.index')" :action="request()->routeIs('admin.job.index')">
                 {{ __('Career Job') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.post.index')" :action="request()->routeIs('admin.post.index')">
+                {{ __('Blog') }}
             </x-responsive-nav-link>
         </div>
 

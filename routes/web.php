@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChatBoxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WordpressController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CreativeController;
 use App\Http\Controllers\Admin\CareerJobController;
 
@@ -73,6 +74,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/creative/update/{id}', [CreativeController::class, 'update'])->name('admin.creative.update');
 
     Route::get('/admin/creative/show', [CreativeController::class, 'show'])->name('admin.creative.show');
+
+    // for job..............
+    Route::resource('admin/post', PostController::class)->names([
+        'index' => 'admin.post.index',
+        'create' => 'admin.post.create',
+        'store' => 'admin.post.store',
+        'show' => 'admin.post.show',
+        'edit' => 'admin.post.edit',
+        'update' => 'admin.post.update',
+        'destroy' => 'admin.post.destroy',
+    ]);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
