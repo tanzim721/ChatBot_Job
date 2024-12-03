@@ -19,4 +19,5 @@ class CareerJob extends Model
         'description',
         'salary',
     ];
+
 }

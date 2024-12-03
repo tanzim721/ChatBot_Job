@@ -58,7 +58,7 @@ class CreativeController extends Controller
         $creative->content = $request->content;
         $creative->landing_url = $request->landing_url;
         $creative->tracking_url = $request->tracking_url;
-        $creative->image = json_encode($filePaths);
+        $creative->image = json_encode($filePaths); 
         // $creative->video = json_encode($filePaths1);
         $creative->creative_name = $request->creative_name;
         $creative->cta_name = $request->cta_name;
