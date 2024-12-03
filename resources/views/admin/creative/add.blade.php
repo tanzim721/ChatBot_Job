@@ -21,11 +21,7 @@
 
                                     <select id="assetTypeDropdown" name="creative_type_id" class="bg-transparent text-white" style="border-radius: 5px; width: 100%;">
                                         <option class="text-black" value="">Select Asset Type</option>
-                                        {{-- <option class="text-black" value="expemdable video">Expendable Video</option>
-                                        <option class="text-black" value="video canvas">Video Canvas</option>
-                                        <option class="text-black" value="scratch">Scratch</option>
-                                        <option class="text-black" value="carousel">Carousel</option> --}}
-                                        @foreach ($creative_types as $creative_type)
+                                         @foreach ($creative_types as $creative_type)
                                             <option class="text-black" value="{{ $creative_type->id }}" {{ old('asset_type') == $creative_type->name ? 'selected' : '' }}>{{ $creative_type->name }}</option>
                                         @endforeach
                                     </select>
