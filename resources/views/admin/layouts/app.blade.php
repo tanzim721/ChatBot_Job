@@ -22,7 +22,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        
+
 
 
         .dashboard {
@@ -64,7 +64,7 @@
             background: radial-gradient(circle, rgba(11, 34, 64, 1) 0%, rgba(9, 14, 22, 1) 65%);
         }
 
-        
+
 
 
 
@@ -280,7 +280,7 @@
                 $('#contentText').show();
                 $('#contentText').text("You have selected video");
             });
-            
+
         });
 
         // My Vanila JS
@@ -327,13 +327,13 @@
                 mainAssetErrorMSG.innerText = "Please select 6 Images*";
             }else{
                 mainAssetErrorMSG.innerText = "";
-            }                            
+            }
         });
 
 
         // update the file list selection based on the selected value
-        fileInput.addEventListener('click', () => {    
-            if (selectedValue == 1 || selectedValue == 2 || selectedValue == 6 || selectedValue == 7 || selectedValue == 8 || selectedValue == 9 || selectedValue == 10 ||selectedValue == 11 ||selectedValue == 12 ||selectedValue == 13) {       
+        fileInput.addEventListener('click', () => {
+            if (selectedValue == 1 || selectedValue == 2 || selectedValue == 6 || selectedValue == 7 || selectedValue == 8 || selectedValue == 9 || selectedValue == 10 ||selectedValue == 11 ||selectedValue == 12 ||selectedValue == 13) {
                 fileInput.setAttribute('accept', 'image/jpeg, image/png, image/gif');
             }else if(selectedValue == 4 || selectedValue == 5) {
                 fileInput.setAttribute('accept', 'image/jpeg, image/png, image/gif, video/mp4, video/mkv, video/webm');
@@ -357,7 +357,7 @@
 
             selectedFiles.forEach(file => {
                 if (file.type.startsWith("image/")) {
-                    imageCount++; 
+                    imageCount++;
                 } else if (file.type.startsWith("video/")) {
                     videoCount++;
                 }
@@ -443,21 +443,21 @@
                 }
             }
 
-         
+
 
             if (selectedFiles.length > 0) {
             const firstImage = selectedFiles[0];
-            
+
             if (firstImage.type.startsWith('image/')) {
                 const reader = new FileReader();
                 const imagePreview = document.getElementById('ImagePreview');
 
                 reader.onload = function (e) {
-                    console.log('Image loaded:', e.target.result);  
+                    console.log('Image loaded:', e.target.result);
                     imagePreview.style.backgroundImage = `url(${e.target.result})`;
                 };
 
-                reader.readAsDataURL(firstImage);  
+                reader.readAsDataURL(firstImage);
             } else {
                 console.log('The selected file is not an image');
             }
@@ -470,7 +470,7 @@
             }else {
                 fileList.classList.add('d-none');
             }
-    
+
             fileList.classList.remove('d-none');
             inputTextSection.classList.remove('d-none');
             fileList.innerHTML = '';
@@ -495,7 +495,7 @@
 
 
         // remove a file from the list
-        function removeFile(index) {           
+        function removeFile(index) {
             const fileArray = Array.from(fileInput.files);
             fileArray.splice(index, 1);
 
@@ -545,7 +545,7 @@
             document.getElementById("userInputCTA2").innerText = btn
             document.getElementById("interLandingURL").classList.remove("d-none");
             console.log(btnValue);
-                
+
         }
 
         //Sumbit Landing URL
@@ -628,7 +628,7 @@
         pickr.on('change', (color) => {
             const rgbaColor = color.toHEXA().toString(); // Get the color in HEXA format
             //console.log('Selected color:', rgbaColor);
-            const element = document.getElementById("campaignNameShow");           
+            const element = document.getElementById("campaignNameShow");
             element.style.color = rgbaColor;
         });
 
@@ -658,14 +658,14 @@
 
         element.style.left = `${newLeft - containerRect.left}px`;
         element.style.top = `${newTop - containerRect.top}px`;
-        element.style.position = 'absolute'; 
+        element.style.position = 'absolute';
         element.style.zIndex = '1000';
         }
         });
 
         document.addEventListener('mouseup', () => {
         isDragging = false;
-         document.body.style.userSelect = ''; 
+         document.body.style.userSelect = '';
         });
     };
 
