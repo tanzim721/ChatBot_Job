@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('admin.creative.add')" :action="request()->routeIs('admin.creative.add')">
                         {{ __('Creative') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.creative.view')" :action="request()->routeIs('admin.creative.view')">
+                        {{ __('Creative List') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.post.index')" :action="request()->routeIs('admin.post.index')">
                         {{ __('Blog') }}
                     </x-nav-link>

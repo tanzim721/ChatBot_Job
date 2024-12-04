@@ -36,9 +36,10 @@ class CreativeController extends Controller
             'creative_name' => 'required | max:50',
         ]);
 
+        $filePaths = [];
         // Check if files exist in the request
+        $filePaths1 = [];
         if ($request->hasFile('image')) {
-            $filePaths = [];
             foreach ($request->file('image') as $key => $file) {
                 $imageName1 = strtotime('now') . $key . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads'), $imageName1);
@@ -46,7 +47,6 @@ class CreativeController extends Controller
             }
         }
         if ($request->hasFile('video')) {
-            $filePaths = [];
             foreach ($request->file('video') as $key => $file) {
                 $videoName1 = strtotime('now') . $key . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads'), $videoName1);
@@ -58,7 +58,7 @@ class CreativeController extends Controller
         $creative->content = $request->content;
         $creative->landing_url = $request->landing_url;
         $creative->tracking_url = $request->tracking_url;
-        $creative->image = json_encode($filePaths); 
+        $creative->image = json_encode($filePaths);
         // $creative->video = json_encode($filePaths1);
         $creative->creative_name = $request->creative_name;
         $creative->cta_name = $request->cta_name;
