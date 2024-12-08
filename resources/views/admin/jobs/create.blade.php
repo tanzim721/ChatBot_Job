@@ -13,7 +13,7 @@
     <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ route('admin.job.store') }}" method="POST" class="p-3">
+                <form action="{{ route('admin.job.store') }}" method="POST" class="p-3" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="title">
@@ -129,8 +129,8 @@
                         </label>
                         <input
                             class='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600'
-                            id="company_logo" name="company_logo" type="url" value="{{ old('company_logo') }}"
-                            placeholder="https://yourwebsite.com/images/company-logo.png">
+                            id="company_logo" name="company_logo" type="file" value="{{ old('company_logo') }}"
+                            placeholder="Images">
                         @error('company_logo')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {{ $message }}

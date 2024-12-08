@@ -74,7 +74,7 @@
 
                 <div class="flex items-center justify-between max-w-2xl mx-auto gap-x-8 lg:mx-0 lg:max-w-none">
                     <div class="flex flex-col items-start md:flex-row gap-x-6">
-                        <img src="{{ $job->company_logo }}" alt="Company Name"
+                        <img src="{{ asset('uploads/'.$job->company_logo) }}" alt="Company Name"
                             class="flex-none w-16 h-16 rounded-full ring-1 ring-gray-900/10" />
                         <h1>
                             <div class="text-sm leading-6 text-indigo-400">
