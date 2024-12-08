@@ -29,7 +29,8 @@ class StoreCareerJobRequest extends FormRequest
             'company_name' => 'required|string|max:40',
             'role' => 'required|string|max:100',
             'apply_url' => 'required|url|max:255',
-            'company_logo' => 'required|url|max:255',
+            'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
+            // 'company_logo' => 'required|url|max:255',
             'description' => 'required',
             'salary' => 'required|max:20',
         ];

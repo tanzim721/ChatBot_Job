@@ -14,7 +14,7 @@ class CreativeController extends Controller
     public function view()
     {
         $creatives = Creative::with('creativeType')->paginate(5);
-        dd($creatives);
+        // dd($creatives);
         return view('admin.creative.view', compact('creatives'));
     }
     public function add()

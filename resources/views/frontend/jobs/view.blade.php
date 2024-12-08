@@ -118,7 +118,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex flex-col items-start gap-6 md:flex-row md:items-center">
                                         <img alt="company logo" loading="lazy" class="w-16 h-16 p-2 bg-gray-700 rounded-xl"
-                                            style="color: transparent" src="{{ $data->company_logo }}" />
+                                            style="color: transparent" src="{{ asset('uploads/'.$data->company_logo) }}" />
                                         <div>
                                             <p class="text-sm font-medium text-indigo-400">
                                                 {{ $data->company_name }}
